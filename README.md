@@ -67,7 +67,11 @@ If you want to fetch data without complete OAuth workflow, only using consumer_k
 
 
 ## Changelog ##
-
+* Version 0.74: 04 May 2014:
+	*Added ability to not verify SSL, for dev environments
+	*Removed accidental commit of mutliple session key handling
+* Version 0.73: 29 April 2014:
+	*Added API calls to Get Alams, Add Alarm, Update Alarm and Delete Alarm
 * Version 0.72: 20 March, 2013:
    * Bugs: minor bugfixes to put this thing together
 * Version 0.71: 02 April, 2012:

@@ -55,14 +55,16 @@ class FitBitPHP
      * @param string $user_agent User-agent to use in API calls
      * @param string $response_format Response format (json or xml) to use in API calls
      */
-    public function __construct($consumer_key, $consumer_secret, $debug = 1, $user_agent = null, $response_format = 'xml')
+    public function __construct($consumer_key, $consumer_secret, $debug = 1, $user_agent = null, $response_format = 'xml', $verifySSL=1)
     {
         $this->initUrls();
 
         $this->consumer_key = $consumer_key;
         $this->consumer_secret = $consumer_secret;
         $this->oauth = new OAuth($consumer_key, $consumer_secret, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_AUTHORIZATION);
-
+	if(!$verifySSL)
+            $this->oauth->disableSSLChecks();
+        
         $this->debug = $debug;
         if ($debug)
             $this->oauth->enableDebug();
@@ -2004,7 +2006,6 @@ class FitBitPHP
         }
     }
 	
-	
 	/**
      * Get list of alarms for a device
      *
@@ -2033,7 +2034,6 @@ class FitBitPHP
             throw new FitBitException($responseInfo['http_code'], 'Fitbit request failed. Code: ' . $responseInfo['http_code']);
         }
     }
-
 	
 	/**
      * Add an alarm for a device
@@ -2088,7 +2088,6 @@ class FitBitPHP
                 throw new FitBitException($responseInfo['http_code'], $response->message, 'Fitbit request failed. Code: ' . $responseInfo['http_code']);
         }
     }
-	
 	
 	/**
      * Update an alarm for a device
@@ -2147,7 +2146,6 @@ class FitBitPHP
             throw new FitBitException($responseInfo['http_code'], 'Fitbit request failed. Code: ' . $responseInfo['http_code']);
         }
     }
-	
 	
 	/**
      * Delete an alarm for a device
@@ -2640,6 +2638,3 @@ class FitBitRateLimiting
     }
 
 }
-
-
-
